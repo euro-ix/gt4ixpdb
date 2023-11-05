@@ -7,7 +7,8 @@ Class {
 		'manrs',
 		'providerCount',
 		'ipAddresses',
-		'name'
+		'name',
+		'providers'
 	],
 	#category : #'GT4IXPDB-Model'
 }
@@ -29,6 +30,19 @@ GtIXPDBParticipant >> gtIPAddressesFor: aView [
 		title: 'IP Adresses';
 		priority: 1;
 		items: [ self ipAddresses ]
+]
+
+{ #category : #accessing }
+GtIXPDBParticipant >> gtProvidersFor: aView [
+	<gtView>
+	^ aView columnedList
+		title: 'Providers';
+		priority: 2;
+		items: [ self providers ];
+		column: 'ID' text: #id;
+		column: 'Name' text: #name;
+		column: 'Website' text: #website;
+		column: 'Updated' text: #updated
 ]
 
 { #category : #accessing }
@@ -100,4 +114,12 @@ GtIXPDBParticipant >> providerCount [
 { #category : #accessing }
 GtIXPDBParticipant >> providerCount: anObject [
 	providerCount := anObject
+]
+
+{ #category : #accessing }
+GtIXPDBParticipant >> providers [
+	^ providers
+		ifNil: [ providers := self client
+					get: 'participant' , self id , '/providers'
+					into: GtIXPDBProvider ]
 ]

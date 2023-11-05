@@ -7,7 +7,8 @@ Class {
 		'contacts',
 		'country',
 		'name',
-		'website'
+		'website',
+		'providers'
 	],
 	#category : #'GT4IXPDB-Model'
 }
@@ -53,6 +54,33 @@ GtIXPDBOrganization >> country: anObject [
 ]
 
 { #category : #accessing }
+GtIXPDBOrganization >> gtContactsFor: aView [
+	<gtView>
+	^ aView columnedList
+		title: 'Contacts';
+		priority: 1;
+		items: [ self contacts ];
+		column: 'Name' text: #name;
+		column: 'Address' text: #address;
+		column: 'email' text: #email;
+		column: 'City' text: #city;
+		column: 'Country' text: #country
+]
+
+{ #category : #accessing }
+GtIXPDBOrganization >> gtProvidersFor: aView [
+	<gtView>
+	^ aView columnedList
+		title: 'Providers';
+		priority: 2;
+		items: [ self providers ];
+		column: 'ID' text: #id;
+		column: 'Name' text: #name;
+		column: 'Website' text: #website;
+		column: 'Updated' text: #updated
+]
+
+{ #category : #accessing }
 GtIXPDBOrganization >> name [
 	^ name
 ]
@@ -72,6 +100,14 @@ GtIXPDBOrganization >> onRawData [
 		country: (rawData at: 'country');
 		name: (rawData at: 'name');
 		website: (rawData at: 'website')
+]
+
+{ #category : #accessing }
+GtIXPDBOrganization >> providers [
+	^ providers
+		ifNil: [ providers := self client
+					get: '/organization/' , self id , '/providers'
+					into: GtIXPDBProvider ]
 ]
 
 { #category : #accessing }

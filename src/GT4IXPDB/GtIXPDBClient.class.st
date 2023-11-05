@@ -22,6 +22,13 @@ GtIXPDBClient >> defaultBaseUrl [
 	^ 'https://api.ixpdb.net/v1'
 ]
 
+{ #category : #'as yet unclassified' }
+GtIXPDBClient >> generateMap [
+	^ GtIXPDBMap new
+		client: self;
+		generate
+]
+
 { #category : #'api call' }
 GtIXPDBClient >> get: aUrl [
 	^ STONJSON fromString: (self newClientFor: aUrl) get
@@ -49,6 +56,15 @@ GtIXPDBClient >> getOrganization: anId [
 { #category : #'api call' }
 GtIXPDBClient >> getProvider: anId [
 	^ self get: '/provider/' byId: anId into: GtIXPDBProvider
+]
+
+{ #category : #accessing }
+GtIXPDBClient >> gtBuildMapActionFor: anAction [
+	<gtAction>
+	^ anAction button
+		icon: BrGlamorousVectorIcons play;
+		tooltip: 'Generate map';
+		action: [ :aButton | aButton phlow spawnObject: self generateMap ]
 ]
 
 { #category : #view }
