@@ -1,7 +1,7 @@
 # gt4ixpdb
 
 is a wrapper around the IXPDB API for use as a client in [Glamorous Toolkit](https://gtoolkit.com).
-## Installation```Metacello new	repository: '';	baseline: 'Gt4IXPDB';	load```## Usage
+## Installation```Metacello new	repository: 'github://hellerve/gt4ixpdb:main/src';	baseline: 'Gt4IXPDB';	load```## Usage
 
 Just type
 
