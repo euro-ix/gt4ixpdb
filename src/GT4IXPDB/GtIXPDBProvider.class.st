@@ -126,19 +126,28 @@ GtIXPDBProvider >> networks [
 { #category : #accessing }
 GtIXPDBProvider >> onRawData [
 	self
-		ixfExportApi: (rawData at: 'apis' at: 'ixfexport');
-		trafficApi: (rawData at: 'apis' at: 'traffic');
+		ixfExportApi: (rawData
+				at: 'apis'
+				at: 'ixfexport'
+				ifAbsent: [ nil ]);
+		trafficApi: (rawData
+				at: 'apis'
+				at: 'traffic'
+				ifAbsent: [ nil ]);
 		city: (rawData at: 'city');
 		country: (rawData at: 'country');
-		locationCount: (rawData at: 'location_count');
-		lookingGlass: (rawData at: 'looking_glass');
-		manrs: (rawData at: 'manrs');
+		locationCount: (rawData at: 'location_count' ifAbsent: [ nil ]);
+		lookingGlass: (rawData at: 'looking_glass' ifAbsent: [ nil ]);
+		manrs: (rawData at: 'manrs' ifAbsent: [ nil ]);
 		name: (rawData at: 'name');
-		organizationId: (rawData at: 'organization_id');
-		participantCount: (rawData at: 'participant_count');
-		pdbId: (rawData at: 'pdb_id');
-		updated: (DateAndTime fromString: (rawData at: 'updated'));
-		website: (rawData at: 'website')
+		organizationId: (rawData at: 'organization_id' ifAbsent: [ nil ]);
+		participantCount: (rawData at: 'participant_count' ifAbsent: [ nil ]);
+		pdbId: (rawData at: 'pdb_id' ifAbsent: [ nil ]);
+		updated: (rawData
+				at: 'updated'
+				ifPresent: [ :aString | DateAndTime fromString: aString ]
+				ifAbsent: [ nil ]);
+		website: (rawData at: 'website' ifAbsent: [ nil ])
 ]
 
 { #category : #accessing }

@@ -120,6 +120,6 @@ GtIXPDBParticipant >> providerCount: anObject [
 GtIXPDBParticipant >> providers [
 	^ providers
 		ifNil: [ providers := self client
-					get: 'participant' , self id , '/providers'
+					get: '/participant/' , self asn asString , '/providers'
 					into: GtIXPDBProvider ]
 ]
