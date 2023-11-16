@@ -14,6 +14,11 @@ Class {
 }
 
 { #category : #accessing }
+GtIXPDBParticipant >> = other [
+	^ self class = other class and: [ self asn = other asn ]
+]
+
+{ #category : #accessing }
 GtIXPDBParticipant >> asn [
 	^ asn
 ]
@@ -43,6 +48,11 @@ GtIXPDBParticipant >> gtProvidersFor: aView [
 		column: 'Name' text: #name;
 		column: 'Website' text: #website;
 		column: 'Updated' text: #updated
+]
+
+{ #category : #accessing }
+GtIXPDBParticipant >> hash [
+	^ self asn hash
 ]
 
 { #category : #accessing }

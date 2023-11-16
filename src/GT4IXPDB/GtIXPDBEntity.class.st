@@ -10,6 +10,11 @@ Class {
 }
 
 { #category : #accessing }
+GtIXPDBEntity >> = other [
+	^ self class = other class and: [ self id = other id ]
+]
+
+{ #category : #accessing }
 GtIXPDBEntity >> client [
 	^ client
 ]
@@ -26,6 +31,11 @@ GtIXPDBEntity >> fromRawData: aDictionary [
 	(aDictionary includesKey: 'id') ifTrue: [ self id: (aDictionary at: 'id') ].
 
 	self onRawData
+]
+
+{ #category : #accessing }
+GtIXPDBEntity >> hash [
+	^ self id hash
 ]
 
 { #category : #accessing }
