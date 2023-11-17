@@ -94,6 +94,30 @@ GtIXPDBClient >> gtProvidersFor: aView [
 		column: 'Updated' text: #updated
 ]
 
+{ #category : #accessing }
+GtIXPDBClient >> gtSearchParticipants: aSearch [
+	<gtSearch>
+	^ aSearch list
+		title: 'Participants';
+		priority: 2;
+		items: [ self participants ];
+		itemsLimit: Float infinity;
+		itemName: #name;
+		filterBySubstring
+]
+
+{ #category : #accessing }
+GtIXPDBClient >> gtSearchProviders: aSearch [
+	<gtSearch>
+	^ aSearch list
+		title: 'Providers';
+		priority: 1;
+		items: [ self providers ];
+		itemsLimit: Float infinity;
+		itemName: #name;
+		filterBySubstring
+]
+
 { #category : #view }
 GtIXPDBClient >> gtTrafficsFor: aView [
 	<gtView>

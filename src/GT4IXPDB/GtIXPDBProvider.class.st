@@ -45,10 +45,12 @@ GtIXPDBProvider >> country: anObject [
 { #category : #accessing }
 GtIXPDBProvider >> gtNetworksFor: aView [
 	<gtView>
-	^ aView list
+	^ aView columnedList
 		title: 'Networks';
 		priority: 1;
-		items: [ self networks ]
+		items: [ self networks ];
+		column: 'Name' text: #name;
+		column: '# of addresses' text: [ :aNetwork | aNetwork addresses size ]
 ]
 
 { #category : #accessing }
@@ -63,6 +65,18 @@ GtIXPDBProvider >> gtParticipantsFor: aView [
 		column: 'Provider Count' text: #providerCount;
 		column: 'IPv6' text: #ipv6;
 		column: 'MANRS' text: #manrs
+]
+
+{ #category : #accessing }
+GtIXPDBProvider >> gtSearchParticipants: aSearch [
+	<gtSearch>
+	^ aSearch list
+		title: 'Participants';
+		priority: 2;
+		items: [ self participants ];
+		itemsLimit: Float infinity;
+		itemName: #name;
+		filterBySubstring
 ]
 
 { #category : #accessing }
@@ -195,6 +209,11 @@ GtIXPDBProvider >> pdbId [
 { #category : #accessing }
 GtIXPDBProvider >> pdbId: anObject [
 	pdbId := anObject
+]
+
+{ #category : #accessing }
+GtIXPDBProvider >> printOn: aStream [
+	aStream nextPutAll: self name
 ]
 
 { #category : #accessing }

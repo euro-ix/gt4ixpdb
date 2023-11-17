@@ -46,8 +46,20 @@ GtIXPDBParticipant >> gtProvidersFor: aView [
 		items: [ self providers ];
 		column: 'ID' text: #id;
 		column: 'Name' text: #name;
-		column: 'Website' text: #website;
-		column: 'Updated' text: #updated
+		column: 'City' text: #city;
+		column: 'Country' text: #country
+]
+
+{ #category : #accessing }
+GtIXPDBParticipant >> gtSearchProviders: aSearch [
+	<gtSearch>
+	^ aSearch list
+		title: 'Providers';
+		priority: 1;
+		items: [ self providers ];
+		itemsLimit: Float infinity;
+		itemName: #name;
+		filterBySubstring
 ]
 
 { #category : #accessing }
