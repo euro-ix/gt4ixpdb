@@ -74,7 +74,7 @@ GtIXPDBClient >> gtParticipantsFor: aView [
 		title: 'Participants';
 		priority: 1;
 		items: [ self participants ];
-		column: 'Name' text: #name;
+		column: 'Name' text: #name weight: 3;
 		column: 'ASN' text: #asn;
 		column: 'Provider Count' text: #providerCount;
 		column: 'IPv6' text: #ipv6;
@@ -88,7 +88,7 @@ GtIXPDBClient >> gtProvidersFor: aView [
 		title: 'Providers';
 		priority: 2;
 		items: [ self providers ];
-		column: 'ID' text: #id;
+		column: 'ID' text: #id weight: 0.5;
 		column: 'Name' text: #name;
 		column: 'Website' text: #website;
 		column: 'Updated' text: #updated

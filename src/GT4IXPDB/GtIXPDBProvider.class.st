@@ -43,6 +43,60 @@ GtIXPDBProvider >> country: anObject [
 ]
 
 { #category : #accessing }
+GtIXPDBProvider >> gtGraphFor: aView [
+	<gtView>
+	^ aView mondrian
+		title: 'Graph';
+		priority: 3;
+		painting: [ :m | 
+			| aParticipantsList |
+			aParticipantsList := self participants.
+			m nodes
+				stencil: [ :aParticipant | 
+					| element |
+					element := BlTextElement new.
+					element
+						when: BlClickEvent
+							do: [ :e | 
+								e consumed: true.
+								element phlow spawnObject: aParticipant ];
+						text: (aParticipant name asRopedText foreground: Color gray) ];
+				with: aParticipantsList.
+			m nodes
+				stencil: [ :aProvider | 
+					| element |
+					element := BlTextElement new.
+					element
+						when: BlClickEvent
+							do: [ :e | 
+								e consumed: true.
+								element phlow spawnObject: aProvider ];
+						text: aProvider name asRopedText ];
+				with: {self}.
+			m edges
+				stencil: [ :x | 
+					BlManhattanLineElement new
+						zIndex: 0;
+						beFixedTo;
+						cornerRadius: 10;
+						fixedDistance: 10;
+						border: (BlBorder paint: (Color gray alpha: 0.2) width: 2);
+						toHead: (BlArrowheadSimpleArrow new
+								border: (BlBorder builder
+										paint: (Color gray alpha: 0.2);
+										width: 2;
+										build)) ];
+				fromRightCenter;
+				toLeftCenter;
+				connect: aParticipantsList
+					from: [ :x | self ]
+					to: #yourself.
+			m layout horizontalDominanceTree
+				nodeDistance: 10;
+				levelDistance: 20 ]
+]
+
+{ #category : #accessing }
 GtIXPDBProvider >> gtNetworksFor: aView [
 	<gtView>
 	^ aView columnedList
